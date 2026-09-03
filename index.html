@@ -68,10 +68,13 @@
 
   /* Hero */
   .hero {
+    position: relative;
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    background:
+      linear-gradient(135deg, rgba(14,31,51,0.88) 0%, rgba(22,50,79,0.78) 100%),
+      url('images/hero.jpg') center/cover no-repeat;
     color: var(--white);
     padding-top: 90px;
   }
@@ -153,10 +156,17 @@
   }
   .stat-num { font-size: 34px; font-family: Georgia, serif; color: var(--navy); font-weight: 700; }
   .stat-label { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); }
+  .about-img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
   .about-panel {
     background: var(--navy);
     color: var(--white);
-    padding: 44px;
+    padding: 36px 40px;
     border-radius: 4px;
   }
   .about-panel h3 { color: var(--gold-light); font-size: 22px; margin-bottom: 16px; }
@@ -202,15 +212,18 @@
     box-shadow: 0 6px 20px rgba(14,31,51,0.06);
   }
   .listing-img {
-    height: 190px;
-    background: linear-gradient(135deg, var(--navy-light), var(--navy));
-    display: flex; align-items: center; justify-content: center;
-    color: var(--gold-light);
-    font-size: 13px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    height: 220px;
     position: relative;
+    overflow: hidden;
+    background: var(--navy);
   }
+  .listing-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .listing-card:hover .listing-img img { transform: scale(1.05); }
   .listing-tag {
     position: absolute;
     top: 14px; left: 14px;
@@ -368,10 +381,13 @@
           </div>
         </div>
       </div>
+      <div>
+      <img src="images/about.jpg" alt="Modern home lit up at dusk" class="about-img" loading="lazy">
       <div class="about-panel">
         <h3>Our Approach</h3>
         <p>We treat every property as an investment decision — evaluating cash flow, appreciation potential, and risk before recommending a deal.</p>
         <p>Our brokerage team handles the details, from listing and marketing to negotiation and closing, so clients can move with confidence.</p>
+      </div>
       </div>
     </div>
   </div>
@@ -413,7 +429,10 @@
     </div>
     <div class="listings-grid">
       <div class="listing-card">
-        <div class="listing-img"><span class="listing-tag">For Sale</span>Property Photo</div>
+        <div class="listing-img">
+          <span class="listing-tag">For Sale</span>
+          <img src="images/listing-multifamily.jpg" alt="Multifamily apartment building exterior" loading="lazy">
+        </div>
         <div class="listing-body">
           <div class="listing-price">$425,000</div>
           <div class="listing-address">3-Unit Multifamily &middot; Sample Listing</div>
@@ -421,7 +440,10 @@
         </div>
       </div>
       <div class="listing-card">
-        <div class="listing-img"><span class="listing-tag">For Sale</span>Property Photo</div>
+        <div class="listing-img">
+          <span class="listing-tag">For Sale</span>
+          <img src="images/listing-single-family.jpg" alt="Single-family home with wraparound porch" loading="lazy">
+        </div>
         <div class="listing-body">
           <div class="listing-price">$298,500</div>
           <div class="listing-address">Single-Family Rental &middot; Sample Listing</div>
@@ -429,7 +451,10 @@
         </div>
       </div>
       <div class="listing-card">
-        <div class="listing-img"><span class="listing-tag">Under Contract</span>Property Photo</div>
+        <div class="listing-img">
+          <span class="listing-tag">Under Contract</span>
+          <img src="images/listing-mixed-use.jpg" alt="Mixed-use building with ground-floor retail and apartments above" loading="lazy">
+        </div>
         <div class="listing-body">
           <div class="listing-price">$612,000</div>
           <div class="listing-address">Mixed-Use Building &middot; Sample Listing</div>
