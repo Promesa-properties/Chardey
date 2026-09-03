@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Promesa Properties | Real Estate Investment &amp; Brokerage</title>
+<style>
+  :root {
+    --navy: #0e1f33;
+    --navy-light: #16324f;
+    --gold: #c9a24b;
+    --gold-light: #e0c07f;
+    --cream: #f7f4ee;
+    --gray: #5b6470;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: var(--navy);
+    background: var(--white);
+    line-height: 1.6;
+  }
+  a { text-decoration: none; color: inherit; }
+  img { max-width: 100%; display: block; }
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  h1, h2, h3 { font-family: Georgia, 'Times New Roman', serif; font-weight: 600; }
+
+  /* Header */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(14,31,51,0.96);
+    z-index: 100;
+    padding: 18px 0;
+  }
+  header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    color: var(--white);
+    font-family: Georgia, serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
+  .logo span { color: var(--gold); }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 32px;
+  }
+  nav a {
+    color: var(--white);
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--gold-light); }
+  .nav-toggle { display: none; background: none; border: none; color: var(--white); font-size: 26px; cursor: pointer; }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    color: var(--white);
+    padding-top: 90px;
+  }
+  .hero .container { text-align: center; }
+  .hero .eyebrow {
+    color: var(--gold-light);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: 52px;
+    max-width: 820px;
+    margin: 0 auto 20px;
+    line-height: 1.2;
+  }
+  .hero p {
+    font-size: 18px;
+    color: #cfd8e3;
+    max-width: 600px;
+    margin: 0 auto 36px;
+  }
+  .btn {
+    display: inline-block;
+    padding: 15px 36px;
+    background: var(--gold);
+    color: var(--navy);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 13px;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline {
+    display: inline-block;
+    padding: 14px 34px;
+    border: 1px solid var(--white);
+    color: var(--white);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 13px;
+    border-radius: 2px;
+    margin-left: 14px;
+    transition: background 0.2s;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.1); }
+
+  /* Section base */
+  section { padding: 100px 0; }
+  .section-header { text-align: center; max-width: 640px; margin: 0 auto 60px; }
+  .section-header .eyebrow {
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 13px;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .section-header h2 { font-size: 36px; margin-bottom: 14px; }
+  .section-header p { color: var(--gray); font-size: 16px; }
+
+  /* About */
+  .about { background: var(--cream); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 30px;
+  }
+  .stat-num { font-size: 34px; font-family: Georgia, serif; color: var(--navy); font-weight: 700; }
+  .stat-label { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); }
+  .about-panel {
+    background: var(--navy);
+    color: var(--white);
+    padding: 44px;
+    border-radius: 4px;
+  }
+  .about-panel h3 { color: var(--gold-light); font-size: 22px; margin-bottom: 16px; }
+  .about-panel p { color: #cfd8e3; margin-bottom: 14px; font-size: 15px; }
+
+  /* Services */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .service-card {
+    padding: 40px 30px;
+    border: 1px solid #e5e2da;
+    border-radius: 4px;
+    text-align: center;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .service-card:hover { box-shadow: 0 10px 30px rgba(14,31,51,0.08); transform: translateY(-4px); }
+  .service-icon {
+    width: 56px; height: 56px;
+    margin: 0 auto 22px;
+    background: var(--navy);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold-light);
+    font-size: 24px;
+  }
+  .service-card h3 { font-size: 19px; margin-bottom: 12px; }
+  .service-card p { color: var(--gray); font-size: 14.5px; }
+
+  /* Listings */
+  .listings { background: var(--cream); }
+  .listings-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  .listing-card {
+    background: var(--white);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(14,31,51,0.06);
+  }
+  .listing-img {
+    height: 190px;
+    background: linear-gradient(135deg, var(--navy-light), var(--navy));
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold-light);
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+  }
+  .listing-tag {
+    position: absolute;
+    top: 14px; left: 14px;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 2px;
+  }
+  .listing-body { padding: 24px; }
+  .listing-price { font-size: 22px; font-family: Georgia, serif; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .listing-address { color: var(--gray); font-size: 14px; margin-bottom: 14px; }
+  .listing-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--gray);
+    border-top: 1px solid #eee;
+    padding-top: 14px;
+  }
+  .listings-note {
+    text-align: center;
+    color: var(--gray);
+    font-size: 13.5px;
+    margin-top: 30px;
+    font-style: italic;
+  }
+
+  /* Testimonials */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  .testimonial-card {
+    background: var(--cream);
+    padding: 34px;
+    border-radius: 4px;
+    border-left: 3px solid var(--gold);
+  }
+  .testimonial-quote { font-size: 15px; color: var(--navy); margin-bottom: 20px; font-style: italic; }
+  .testimonial-name { font-weight: 700; font-size: 14px; }
+  .testimonial-role { font-size: 12.5px; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* Contact */
+  .contact { background: var(--navy); color: var(--white); }
+  .contact .section-header p { color: #cfd8e3; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+  .contact-info-item {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 30px;
+    align-items: flex-start;
+  }
+  .contact-icon {
+    width: 46px; height: 46px;
+    background: rgba(201,162,75,0.15);
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold-light);
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+  .contact-info-item h4 { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--gold-light); margin-bottom: 6px; }
+  .contact-info-item a, .contact-info-item p { color: var(--white); font-size: 16px; }
+  form { display: grid; gap: 18px; }
+  form input, form textarea {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 3px;
+    color: var(--white);
+    font-size: 15px;
+    font-family: inherit;
+  }
+  form input::placeholder, form textarea::placeholder { color: #9fb0c3; }
+  form textarea { resize: vertical; min-height: 120px; }
+  form button {
+    justify-self: start;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  /* Footer */
+  footer {
+    background: #0a1727;
+    color: #8b98a8;
+    text-align: center;
+    padding: 30px 0;
+    font-size: 13px;
+  }
+  footer span { color: var(--gold-light); }
+
+  @media (max-width: 900px) {
+    .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .services-grid, .listings-grid, .testimonials-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 36px; }
+    nav ul { display: none; }
+    .nav-toggle { display: block; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo">Promesa<span>Properties</span></div>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#listings">Listings</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow">Real Estate Investment &amp; Brokerage</span>
+    <h1>Building Wealth Through Smart Real Estate Investment</h1>
+    <p>Promesa Properties partners with investors and homeowners to identify, acquire, and manage properties that deliver lasting value.</p>
+    <a href="#contact" class="btn">Get In Touch</a>
+    <a href="#listings" class="btn-outline">View Listings</a>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <span class="eyebrow" style="color:var(--gold); text-transform:uppercase; letter-spacing:3px; font-size:13px;">About Us</span>
+        <h2 style="font-size:34px; margin:14px 0 18px;">A Trusted Partner in Real Estate Investment</h2>
+        <p style="color:var(--gray); font-size:16px;">Promesa Properties helps clients grow long-term wealth through carefully sourced real estate opportunities and full-service brokerage support. Whether you're acquiring your first investment property or expanding a portfolio, we bring local market expertise and a hands-on approach to every deal.</p>
+        <div class="about-stats">
+          <div>
+            <div class="stat-num">100+</div>
+            <div class="stat-label">Properties Transacted</div>
+          </div>
+          <div>
+            <div class="stat-num">10+</div>
+            <div class="stat-label">Years Combined Experience</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-panel">
+        <h3>Our Approach</h3>
+        <p>We treat every property as an investment decision — evaluating cash flow, appreciation potential, and risk before recommending a deal.</p>
+        <p>Our brokerage team handles the details, from listing and marketing to negotiation and closing, so clients can move with confidence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">What We Do</span>
+      <h2>Our Services</h2>
+      <p>End-to-end support for real estate investors and property sellers alike.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">&#9670;</div>
+        <h3>Investment Acquisitions</h3>
+        <p>We identify and evaluate properties with strong return potential, guiding investors from analysis through closing.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#8962;</div>
+        <h3>Brokerage &amp; Listings</h3>
+        <p>Full-service listing and buyer representation to help clients buy or sell at the right price, with less hassle.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#9776;</div>
+        <h3>Portfolio Strategy</h3>
+        <p>Ongoing guidance for investors building or rebalancing a real estate portfolio over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="listings" id="listings">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Available Now</span>
+      <h2>Featured Listings</h2>
+      <p>A sample of the opportunities we work with. Contact us for current availability.</p>
+    </div>
+    <div class="listings-grid">
+      <div class="listing-card">
+        <div class="listing-img"><span class="listing-tag">For Sale</span>Property Photo</div>
+        <div class="listing-body">
+          <div class="listing-price">$425,000</div>
+          <div class="listing-address">3-Unit Multifamily &middot; Sample Listing</div>
+          <div class="listing-meta"><span>3 Units</span><span>2,400 sqft</span><span>Cap Rate 7.2%</span></div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-img"><span class="listing-tag">For Sale</span>Property Photo</div>
+        <div class="listing-body">
+          <div class="listing-price">$298,500</div>
+          <div class="listing-address">Single-Family Rental &middot; Sample Listing</div>
+          <div class="listing-meta"><span>3 bd</span><span>2 ba</span><span>1,650 sqft</span></div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-img"><span class="listing-tag">Under Contract</span>Property Photo</div>
+        <div class="listing-body">
+          <div class="listing-price">$612,000</div>
+          <div class="listing-address">Mixed-Use Building &middot; Sample Listing</div>
+          <div class="listing-meta"><span>Retail + 2 Units</span><span>4,100 sqft</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="listings-note">Listings shown are placeholders — swap in your current inventory with real photos, prices, and addresses.</p>
+  </div>
+</section>
+
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Client Success</span>
+      <h2>What Clients Say</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Promesa Properties helped us close on our first rental property in under 30 days. Their guidance made the numbers make sense."</p>
+        <div class="testimonial-name">Sample Client</div>
+        <div class="testimonial-role">Investor</div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"They handled our listing from start to finish and got us above asking price. Highly recommend their brokerage team."</p>
+        <div class="testimonial-name">Sample Client</div>
+        <div class="testimonial-role">Home Seller</div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Responsive, knowledgeable, and genuinely invested in our long-term goals as we grew our portfolio."</p>
+        <div class="testimonial-name">Sample Client</div>
+        <div class="testimonial-role">Investor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Get In Touch</span>
+      <h2>Let's Talk About Your Next Move</h2>
+      <p>Reach out to discuss an investment opportunity, a listing, or your real estate goals.</p>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-info-item">
+          <div class="contact-icon">&#9742;</div>
+          <div>
+            <h4>Phone</h4>
+            <a href="tel:+15419443372">(541) 944-3372</a>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">&#9993;</div>
+          <div>
+            <h4>Email</h4>
+            <a href="mailto:chardey@promesa-properties.com">chardey@promesa-properties.com</a>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon">&#8962;</div>
+          <div>
+            <h4>Address</h4>
+            <p>2210 Ashland St</p>
+          </div>
+        </div>
+      </div>
+      <form id="contact-form">
+        <input type="text" id="cf-name" placeholder="Your Name" required>
+        <input type="email" id="cf-email" placeholder="Your Email" required>
+        <input type="tel" id="cf-phone" placeholder="Phone Number">
+        <textarea id="cf-message" placeholder="Tell us what you're looking for..." required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    &copy; 2026 <span>Promesa Properties</span>. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  document.getElementById('contact-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('cf-name').value;
+    var email = document.getElementById('cf-email').value;
+    var phone = document.getElementById('cf-phone').value;
+    var message = document.getElementById('cf-message').value;
+    var body = 'Name: ' + name + '\nEmail: ' + email + '\nPhone: ' + phone + '\n\n' + message;
+    window.location.href = 'mailto:chardey@promesa-properties.com'
+      + '?subject=' + encodeURIComponent('Website Inquiry from ' + name)
+      + '&body=' + encodeURIComponent(body);
+  });
+</script>
+
+</body>
+</html>
